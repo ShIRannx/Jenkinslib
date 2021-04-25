@@ -16,6 +16,7 @@ pipeline {
                     sh '${javaHome}/bin/java -version'
                     mavenHome = tool 'M2'
                     println(mavenHome)
+                    sh '/usr/local/apache-maven-3.8.1/bin/mvn -v'
                     tools.printMes('123')
                     echo 'Hello World'
                 }
