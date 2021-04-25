@@ -1,9 +1,13 @@
 #!groovy
+String workPath = '/opt/jenkins'
 @Library('Jenkinslib') _
 first()
 def tools = new org.shirann.firstModule()
 pipeline {
-    agent any
+    agent {node { label "build01"
+                customWorkspace "${workPath}"
+            }
+    }
     stages {
         stage('Hello') {
             steps {
