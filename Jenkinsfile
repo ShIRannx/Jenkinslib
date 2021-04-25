@@ -24,6 +24,8 @@ pipeline {
                     sh "${antHome}/bin/ant -version"
                     gradleHome = tool 'Gradle'
                     sh "${gradleHome}/bin/gradle -v"
+                    nodejsHome = tool 'Nodejs'
+                    sh "${nodejsHome}/bin/npm -v"
                     echo 'Hello World'
                 }
             }
