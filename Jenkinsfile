@@ -6,8 +6,10 @@ pipeline {
     stages {
         stage('Hello') {
             steps {
-                tools.printMes('123')
-                echo 'Hello World'
+                script{
+                    tools.printMes('123')
+                    echo 'Hello World'
+                }
             }
         }
     }
