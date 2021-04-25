@@ -22,6 +22,8 @@ pipeline {
                     tools.printMes('123')
                     antHome = tool 'Ant'
                     sh "${antHome}/bin/ant -version"
+                    gradleHome = tool 'Gradle'
+                    sh "${gradleHome}/bin/gradle -v"
                     echo 'Hello World'
                 }
             }
