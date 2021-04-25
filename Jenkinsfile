@@ -8,7 +8,7 @@ pipeline {
             }
     }
     stages {
-        stage('Hello') {
+        stage('choseBuildTool') {
             input {
                 message "请选择构建工具:"
                 ok 'Submit'
@@ -16,6 +16,8 @@ pipeline {
                     choice(choices: ['mvn', 'npm', 'gradle', 'ant'], description: '', name: 'Tool')
                 }
             }
+        }
+        stage('choseBuildShell') {
             input {
                 message "请选择构建命令:"
                 ok 'Submit'
@@ -23,11 +25,12 @@ pipeline {
                     choice(choices: ['-v', 'clean package', 'clean', 'clean install', 'clean test'], description: '', name: 'Shell')
                 }
             }
+        }
+        stage('build') {
             timeout(time: 5, unit: "MINUTES"){
                 script {
                     tools.build(Tool, Shell)
                 }
-            }
         }
     }
 }
