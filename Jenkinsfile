@@ -15,7 +15,7 @@ pipeline {
                     javaHome = tool 'jdk'
                     sh '${javaHome}/bin/java -version'
                     mavenHome = tool 'M2'
-                    sh '${mavenHome}/bin/mvn -v'
+                    println(mavenHome)
                     tools.printMes('123')
                     echo 'Hello World'
                 }
