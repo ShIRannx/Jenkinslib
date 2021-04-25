@@ -1,5 +1,6 @@
 #!groovy
 @Library('Jenkinslib') _
+first()
 def tools = new org.shirann.firstModule()
 pipeline {
     agent any
