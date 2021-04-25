@@ -8,6 +8,8 @@ pipeline {
         stage('Hello') {
             steps {
                 script {
+                    mav = tool "${M2}/bin"
+                    sh "mav -v"
                     tools.printMes('123')
                     echo 'Hello World'
                 }
