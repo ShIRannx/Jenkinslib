@@ -31,6 +31,7 @@ pipeline {
                 script {
                     tools.build(Tool, Shell)
                 }
+            }
         }
     }
 }
