@@ -1,7 +1,6 @@
 #!groovy
 String workPath = '/opt/jenkins'
 @Library('Jenkinslib') _
-first()
 def tools = new org.shirann.firstModule()
 pipeline {
     agent {node { label "build01"
@@ -10,25 +9,26 @@ pipeline {
     }
     stages {
         stage('Hello') {
-            steps {
+            input {
+                message "请选择构建工具:"
+                ok 'Submit'
+                parameters {
+                    choice(choices: ['mvn', 'npm', 'gradle', 'ant'], description: '', name: 'Tool')
+                }
+            }
+            input {
+                message "请选择构建命令:"
+                ok 'Submit'
+                parameters {
+                    choice(choices: ['-v', 'clean package', 'clean', 'clean install', 'clean test'], description: '', name: 'Shell')
+                }
+            }
+            timeout(time: 5, unit: "MINUTES"){
                 script {
-                    javaHome = tool 'jdk'
-                    sh "${javaHome}/bin/java -version"
-                    mavenHome = tool 'M2'
-                    println(mavenHome)
-                    sh "${mavenHome}/bin/mvn -v"
-                    echo "variable is true"
-                    // sh '/usr/local/apache-maven-3.8.1/bin/mvn -v'
-                    tools.printMes('123')
-                    antHome = tool 'Ant'
-                    sh "${antHome}/bin/ant -version"
-                    gradleHome = tool 'Gradle'
-                    sh "${gradleHome}/bin/gradle -v"
-                    nodejsHome = tool 'Nodejs'
-                    sh "${nodejsHome}/bin/npm -v"
-                    echo 'Hello World'
+                    tools.build(Tool, Shell)
                 }
             }
         }
     }
 }
+
