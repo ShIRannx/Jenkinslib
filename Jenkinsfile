@@ -20,6 +20,8 @@ pipeline {
                     echo "variable is true"
                     // sh '/usr/local/apache-maven-3.8.1/bin/mvn -v'
                     tools.printMes('123')
+                    antHome = tool 'Ant'
+                    sh "${antHome}/bin/ant -version"
                     echo 'Hello World'
                 }
             }
