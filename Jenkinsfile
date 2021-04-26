@@ -25,8 +25,10 @@ pipeline {
         stage('build') {
             steps{
                 timeout(time: 5, unit: "MINUTES"){
-                    script {
-                        tools.build("${buildType}", "${buildShell}")
+                    stape {
+                        script {
+                            tools.build("${buildType}", "${buildShell}")
+                        }
                     }
                 }
             }
