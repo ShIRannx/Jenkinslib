@@ -27,7 +27,7 @@ pipeline {
                 parameters {
                     choice(choices: ['-v', 'clean package', 'clean', 'clean install', 'clean test'], description: '', name: 'Shell')
             }
-            step {
+            steps {
                 echo "选择了${Shell}命令"
             }
             }
