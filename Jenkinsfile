@@ -26,7 +26,9 @@ pipeline {
         stage('deploy') {
             steps{
                 timeout(time: 30, unit: "MINUTES"){
-                    deploy.AnsibleDeploy("storages", "-m ping")
+                    script{
+                        deploy.AnsibleDeploy("storages", "-m ping")
+                    }
                 }
             }
         }
