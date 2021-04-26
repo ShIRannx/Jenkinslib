@@ -18,8 +18,10 @@ pipeline {
     }
     stages {
         stage('checkout'){
-            script {
-                checkout([$class: 'GitSCM', branches: [[name: "${buildBranch}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cd85d544-e1c8-4f7a-a2ae-0a463216f918', url: "${srcUrl}"]]])
+            stapes{
+                script {
+                    checkout([$class: 'GitSCM', branches: [[name: "${buildBranch}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cd85d544-e1c8-4f7a-a2ae-0a463216f918', url: "${srcUrl}"]]])
+                }
             }
         }
         stage('build') {
