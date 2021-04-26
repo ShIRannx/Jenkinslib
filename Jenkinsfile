@@ -20,14 +20,14 @@ pipeline {
         stage('checkout'){
             steps{
                 script {
-                    checkout([$class: 'GitSCM', branches: [[name: "${buildName}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cd85d544-e1c8-4f7a-a2ae-0a463216f918', url: "${srcUrl}"]]])
+                    checkout([$class: 'GitSCM', branches: [[name: "${branchName}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cd85d544-e1c8-4f7a-a2ae-0a463216f918', url: "${srcUrl}"]]])
                 }
             }
         }
         stage('build') {
             steps{
                 timeout(time: 5, unit: "MINUTES"){
-                    stape {
+                    steps {
                         script {
                             tools.build("${buildType}", "${buildShell}")
                         }
@@ -46,4 +46,3 @@ pipeline {
         }
     }
 }
-
