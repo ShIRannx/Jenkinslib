@@ -4,7 +4,10 @@ String workPath = '/opt/jenkins'
 def tools = new org.shirann.firstModule()
 def deploy = new org.shirann.deploy()
 String Tool = "${env.Tool}"
-String Shell = "${env.Shell}"
+String buildShell = "${env.buildShell}"
+String srcUrl = "${env.srcUrl}"
+String branchName = "${env.branchName}"
+String buildType = "${env.buildType}"
 pipeline {
     agent {node { label "build01"
                 customWorkspace "${workPath}"
@@ -14,11 +17,16 @@ pipeline {
         skipDefaultCheckout()
     }
     stages {
+        stage('checkout'){
+            script {
+                checkout([$class: 'GitSCM', branches: [[name: "${buildBranch}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cd85d544-e1c8-4f7a-a2ae-0a463216f918', url: "${srcUrl}"]]])
+            }
+        }
         stage('build') {
             steps{
                 timeout(time: 5, unit: "MINUTES"){
                     script {
-                        tools.build("${Tool}", "${Shell}")
+                        tools.build("${buildType}", "${buildShell}")
                     }
                 }
             }
