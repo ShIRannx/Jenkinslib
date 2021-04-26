@@ -16,6 +16,9 @@ pipeline {
                     choice(choices: ['mvn', 'npm', 'gradle', 'ant'], description: '', name: 'Tool')
                 }
             }
+            steps {
+                echo "选择了${Tool}工具"
+            }
         }
         stage('choseBuildShell') {
             input {
@@ -23,13 +26,18 @@ pipeline {
                 ok 'Submit'
                 parameters {
                     choice(choices: ['-v', 'clean package', 'clean', 'clean install', 'clean test'], description: '', name: 'Shell')
-                }
+            }
+            step {
+                echo "选择了${Shell}命令"
+            }
             }
         }
         stage('build') {
-            timeout(time: 5, unit: "MINUTES"){
-                script {
-                    tools.build(Tool, Shell)
+            steps{
+                timeout(time: 5, unit: "MINUTES"){
+                    script {
+                        tools.build(Tool, Shell)
+                    }
                 }
             }
         }
