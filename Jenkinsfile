@@ -37,7 +37,7 @@ pipeline {
             steps{
                 timeout(time: 5, unit: "MINUTES"){
                     script {
-                        tools.build(Tool, Shell)
+                        tools.build("${Tool}", "${Shell}")
                     }
                 }
             }
