@@ -3,7 +3,6 @@ String workPath = '/opt/jenkins'
 @Library('Jenkinslib') _
 def tools = new org.shirann.firstModule()
 def deploy = new org.shirann.deploy()
-String Tool = "${env.Tool}"
 String buildShell = "${env.buildShell}"
 String srcUrl = "${env.srcUrl}"
 String branchName = "${env.branchName}"
