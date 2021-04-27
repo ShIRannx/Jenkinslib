@@ -28,7 +28,8 @@ pipeline {
                 timeout(time: 5, unit: "MINUTES"){
                     steps {
                         script {
-                            tools.build("${buildType}", "${buildShell}")
+                            mavenHome = tool 'M2"
+                            sh "${mavenHome}/bin/mvn ${buildType}"
                         }
                     }
                 }
